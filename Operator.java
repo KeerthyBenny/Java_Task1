@@ -1,22 +1,57 @@
 package calculator;
 
+import java.util.*;
+
 public class Operator {
 		
 	public String findOperator(String str1) {
+
+		LinkedList <String> operatorListAdd = new LinkedList();
+		HashSet <String> operatorListSub = new HashSet();
+		LinkedHashSet <String> operatorListMult = new LinkedHashSet();
+		ArrayList <String> operatorListDiv = new ArrayList();
+
+		operatorListAdd.add("add");
+		operatorListAdd.add("sum");
+		operatorListAdd.add("addition");
+		operatorListAdd.add("+");
 		
-		if (str1.equals("add") || str1.equals("sum") || str1.equals("addition") || str1.equals("+"))
+		operatorListSub.add("sub");
+		operatorListSub.add("minus");
+		operatorListSub.add("subtract");
+		operatorListSub.add("-");
+		
+		operatorListMult.add("multiply");
+		operatorListMult.add("times");
+		operatorListMult.add("multiplication");
+		operatorListMult.add("*");
+		
+		operatorListDiv.add("divide");
+		operatorListDiv.add("divide by");
+		operatorListDiv.add("division");
+		operatorListDiv.add("/");
+		
+		
+		boolean ifContains1 = operatorListAdd.contains(str1);
+		if (ifContains1 == true)
 		{	
 			return "add";
 		}
-		else if (str1.equals("sub") || str1.equals("minus") || str1.equals("subtract") || str1.equals("-") || str1.equals("subtraction") )
+		
+		boolean ifContains2 = operatorListSub.contains(str1);		
+		if ((ifContains2 == true) )
 		{
 			return "sub";
 		}
-		else if (str1.equals("multiply") || str1.equals("times") || str1.equals("multiplication") || str1.equals("*"))
+		
+		boolean ifContains3 = operatorListMult.contains(str1);		
+		if ((ifContains3 == true) )
 		{
 			return "multiply";
 		}
-		else if (str1.equals("divide") || str1.equals("by") || str1.equals("/"))
+		
+		boolean ifContains4 = operatorListDiv.contains(str1);		
+		if ((ifContains4 == true) )
 		{
 			return "divide";
 		}
