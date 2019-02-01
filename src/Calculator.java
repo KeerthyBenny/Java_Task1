@@ -1,82 +1,70 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
-public class Calculator
+public class Calculator extends Exception
 {
-	
-	static Scanner scan = new Scanner(System.in);
-	
 	public static void main(String[] args) 
 	{
-		method();
-	}	
+		System.out.println("Welcome to Satapata calculator\n");
+		List<String> list_history = new ArrayList<String>();
+		method(list_history);
+	}
 	
-	//this method removes the nulls from word_array[] array
-	static String[] removeNullsFromArray(String[] word_array)
-	{
-		String[] refinedArray = new String[word_array.length]; 
-		int count = -1;
-		for(String s : word_array) 
-		{
-			if(s != null) 
-			{ 
-				refinedArray[++count] = s; 
-			}
-		}
-		return word_array = Arrays.copyOf(refinedArray, count + 1);
-	}	
-	
-	static void method()
+	static void method(List<String> list_history)
 	{
 		try
-		{			
-			int number_count = 0, word_count = 0;
-			System.out.println("enter input");
-//			Scanner scan = new Scanner(System.in);
+		{
+			Scanner scan = new Scanner(System.in);
+//			int number_array[] = new int[2];
+			List<Integer> list_int = new ArrayList<Integer>();
+			System.out.println("Enter input to calculate");
 			String input = scan.nextLine();
-			String input_split_array[] = input.split(" ");
-			int number_array[] = new int[2];
-			String word_array[] = new String[10];
-			
-			if(input_split_array[0].equalsIgnoreCase("exit"))
+			String[] input_array = input.split(" ");
+			if(input_array[0].equalsIgnoreCase("history"))
+			{
+				Iterator<String> it = list_history.iterator();
+				while(it.hasNext())
+				{
+					System.out.println(it.next());
+				}
+			}
+			else if(input_array[0].equalsIgnoreCase("exit"))
 			{
 				System.exit(0);
 			}
-			
-			//spliting the input array into  number_array[] and word_array[]
-			for (int i = 0; i < input_split_array.length; i++) 
-			{
-				String compare_str = input_split_array[i];
-				if(IsInteger.checkInteger(compare_str) == true)
-				{
-					number_array[number_count] = Integer.parseInt(compare_str);
-					number_count++;
-				}
-				else
-				{
-					word_array[word_count] = compare_str;
-					word_count++;
-				}
-			}
-			
-			word_array = removeNullsFromArray(word_array);
-			
-			Operations op = new Operations();
-			int value = op.performingOperation(number_array, word_array);
-			if(value == 0)
-			{
-				System.out.println("Invalid input. Try again!");
-			}
 			else
-			{				
-				System.out.println("The total is " + value);
+			{
+				List<String> list_string = new ArrayList<String>(Arrays.asList(input_array));
+				Iterator<String> it = list_string.iterator();
+				while(it.hasNext()) 
+				{
+					String str_list = it.next();
+					if(ExtractInteger.isInteger(str_list))
+					{
+						int temp = Integer.parseInt(str_list);
+						list_int.add(temp);
+					}
+				}
+				int result_value = Operations.operations(list_int, list_string);
+				if(result_value == 0)
+				{ 
+					throw new Calculator();
+				}
+				String result_string = "Total is " + result_value;
+				System.out.println(result_string);
+				
+				String history_variable = input + "\n" + result_string;
+				list_history.add(history_variable);
 			}
-			method();
+			method(list_history);
 		}
 		catch(Exception e)
 		{
-			System.out.println("invalid input. Try again");
-			method();
+			System.out.println("Invalid input. Try again.");
+			method(list_history);
 		}
 	}
 }

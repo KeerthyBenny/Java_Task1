@@ -1,34 +1,24 @@
+import java.util.List;
+
 public class Operations 
 {
-	int performingOperation(int[] number_array, String[] word_array)
+	static int operations(List<Integer> list_int, List<String> list_string)
 	{
-		for (int i = 0; i < word_array.length; i++) 
+		if(list_string.contains("add") || list_string.contains("+"))
 		{
-			if(word_array[i].equalsIgnoreCase("add") 
-					|| word_array[i].equalsIgnoreCase("sum")
-					|| word_array[i].equalsIgnoreCase("plus") 
-					|| word_array[i].equalsIgnoreCase("+"))
-			{
-				return number_array[0] + number_array[1];
-			}
-			else if(word_array[i].equalsIgnoreCase("subtraction") 
-					|| word_array[i].equalsIgnoreCase("minus")
-					|| word_array[i].equalsIgnoreCase("-") 
-					|| word_array[i].equalsIgnoreCase("difference"))
-			{
-				return number_array[0] - number_array[1];
-			}
-			else if(word_array[i].equalsIgnoreCase("divide") 
-					|| word_array[i].equalsIgnoreCase("/"))
-			{
-				return number_array[0] / number_array[1];
-			}
-			else if(word_array[i].equalsIgnoreCase("multiply") 
-					|| word_array[i].equalsIgnoreCase("*")
-					|| word_array[i].equalsIgnoreCase("times"))
-			{
-				return number_array[0] * number_array[1];
-			}
+			return list_int.get(0) + list_int.get(1);
+		}
+		else if(list_string.contains("minus") || list_string.contains("-"))
+		{
+			return list_int.get(0) - list_int.get(1);
+		}
+		else if(list_string.contains("multiply") || list_string.contains("*"))
+		{
+			return list_int.get(0) * list_int.get(1);
+		}
+		else if(list_string.contains("divide") || list_string.contains("/"))
+		{
+			return list_int.get(0) / list_int.get(1);
 		}
 		return 0;
 	}
